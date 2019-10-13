@@ -1,0 +1,106 @@
+Para agregar git al proyecto necesitamos crear un archivo para ignorar las 
+carpetas que no se van a subir , creamos un archivo .gitignore y agregamos
+las carpetas que no queremos subir:
+
+dist/
+node_modules/
+
+Despues para agregar una descripcion del proyecto creamos un archivo
+README.md el cual es una extension parecido a html, se rellena asi: que va 
+a aparecer en la pagina principal del proyecto
+
+#Titulo o nombre del proyecto
+
+Agregar texto simple
+
+```
+agregar comandos para la terminal
+```
+Generar el dist
+```
+tsc -w
+```
+
+Levantar el servidor, dentro del proyecto
+```
+nodemon dist/
+```
+Ahora en el proyecto ejecutamos git init para inicializar el repositorio y dejarlo
+listo:
+
+Para ver que archivos esta guardando git:
+git status
+
+Para tomarle una foto al proyecto y guardarlo:
+Debemos añadir los archivos que tenemos con:
+git add.
+
+Y despues para subir la foto del proyecto:
+
+git commit -m "Primer commit - rest server"
+
+Ahora para restaurar los archivos de un commit a mi proyecto:
+
+git checkout -- .
+
+Ahora para tenemos que crear un repositorio en git, en el cual agregaremos
+los datos 
+
+Ahora para subir el proyecto al repositorio git, ejemplo:
+
+git remote add origin https://github.com/hiramreyes06/socket-server.git
+
+Y despues confirmalo:
+
+git push -u origin master
+
+Despues para hacer una actualizacion commit , en el proyecto ejecutamos:
+
+git add .  para añadir los cambios o nuevos archivos
+
+Despues creamos el commit con su descripcion:
+
+git commit -m "Tercer commit"
+
+Y por ultimo confirmamos y actualozamos el repositorio:
+
+git push -u origin master
+
+----------------------------------------------- 
+
+Ahora para crear un tag , para que tenga una version release y una descripcion:
+
+git tag -a v1.0.0 -m "REST Server listo"
+
+Para saber la version del tag en la que estamos:
+
+git tag
+
+Ahora para subir el tag creado
+
+git push --tags
+
+Despues en la pagina de github en el repositorio del proyecto configuramos el
+tag que creamos, agregando el titulo y mensaje de descripcion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

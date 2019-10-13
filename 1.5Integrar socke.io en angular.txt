@@ -1,0 +1,43 @@
+En un proyecto de angular , en la terminal instalamos:
+
+npm i ngx-socket-io --save
+
+Ahora creamos el web socket url, en el archivo environment y el prod:
+con la direccion url del puerto en el que esta alojado el socket
+
+export const environment = {
+  production: false,
+  wsUrl:'http://localhost:5000'
+};
+
+Ahora en el app.module.ts importamos, y creamos la configuracion y lo añadimos
+a los imports
+
+//sockets
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig={
+  url: environment.wsUrl
+};
+
+***Si nos sale un error de global indefinido, nos tenemos que ir al archivo
+polyfills.ts y agregarle
+
+(windows as any).global = window;
+
+Y ya perro
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

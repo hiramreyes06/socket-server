@@ -1,6 +1,12 @@
-import express from 'express';
-import { SERVER_PORT } from './global/environment';
+Para instalarlo , en la terminal del proyecto:
 
+npm install --save socket.io
+
+Despues para typescript:
+
+npm install @types/socket.io --save-dev
+
+importamos en el server.ts
 
 //Instalamos el typsecript de socket
 import socketIO from 'socket.io';
@@ -8,6 +14,7 @@ import socketIO from 'socket.io';
 //Creamos un intermediario para express y socket io
 import http from 'http';
 
+Ahora en la clase 
 
 export default class Server {
 
@@ -45,10 +52,11 @@ export default class Server {
         });
     }
 
-//Asi arrancamos el servidor
-    start( callback : Function ){
+Y ahora modificamos al index.ts
 
-        this.httpServer.listen( this.port, callback() );
-    }
+const server =  Server.instance;
 
-}
+
+
+
+

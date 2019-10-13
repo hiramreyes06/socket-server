@@ -1,12 +1,14 @@
 import Server from "./server";
 import router from "./routes/router";
 
+
+
 import cors from 'cors';
 
 
 import bodyParser from 'body-parser';
 
-const server = new Server();
+const server =  Server.instance;
 
 //bodyParser SIEMPRE ANTES DE LAS RUTAS
 //El body parser sirve para convertir los datos retornados en json
