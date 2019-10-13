@@ -1,0 +1,109 @@
+Ahora en el proyecto creamos una carpeta routes, en la cual estaran
+todas las direcciones de nuestro servicio rest, despues dentro creamos
+un archivo router.ts :
+
+import { Router, Request, Response } from 'express';
+
+const router = Router();
+
+//Se necesita el path, que es donde se encutra en el servidor web
+//El /mensajes es el endpoint
+router.get('/mensajes', (req:Request, res: Response ) =>{
+    res.json({
+        ok:true,
+        mensaje:'Todo esta bien!!'
+    })
+});
+
+export default router;
+
+Y ahora nos vamos al index.ts y lo importamos y usamos:
+
+import Server from "./server";
+import router from "./routes/router";
+
+
+
+
+const server = new Server();
+
+//Asi se utililiza el servicio rest
+server.app.use('/', router);
+
+server.start( () =>{
+    console.log(`Servidor corriendo en el puerto ${server.port}`);
+});
+
+****Para probar el servicio rest, en postman , hacemos una peticion de tipo
+get y le agregamos localhost:5000/mensajes
+
+Ahora para crear un servicio post , es igual solo cambiando el metodo:
+
+router.post('/mensajes', (req:Request, res: Response ) =>{
+    res.json({
+        ok:true,
+        mensaje:'Todo esta bien!!'
+    })
+});
+
+Otro ejemplo agregando parametros a la url
+
+Primero necesitamos importar el body parser, para poder convertir los datos 
+que nos devuelve el servicio en json, en el index.ts
+
+import bodyParser from 'body-parser';
+
+//bodyParser SIEMPRE ANTES DE LAS RUTAS
+server.app.use( bodyParser.urlencoded({ extended: true}));
+server.app.use( bodyParser.json() );
+
+//De esta forma se llama el servicio rest
+server.app.use('/', router);
+
+Ahora en el ruter.ts
+
+//Le agregamos otro parametro opcional al url
+router.post('/mensajes/:id?', (req:Request, res: Response ) =>{
+
+    const cuerpo= req.body.cuerpo;
+    const de = req.body.de;
+    const id = req.params.id;
+
+    res.json({
+        ok:true,
+        cuerpo,
+        de,
+        id
+    })
+});
+
+Ahora para configuarar el servidor y se abra de manera remota en cualquierl 
+lugar, instalamos
+
+npm install @types/cors --save
+
+Y despues en el index.ts importamos
+
+import cors from 'cors';
+
+y agregamos antes de las rutas de servicios:
+
+server.app.use( cors({ origin: true, credentials: true } ));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

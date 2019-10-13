@@ -1,0 +1,42 @@
+Primero creamos una carpeta en la cual en la terminal ejecutamls
+npm init , le agregamos un nombre , etc..
+
+Ahora instalamos express en la terminal, el --save no se ocupa
+
+npm install express
+
+npm install cors
+
+Cors sirve para que el servidor estando en algun lugar sea provado con algun
+dispositivo que se encuentre en otro lugar o otro hosting,
+
+Ahora, para poder parsear los posteos y recibir la informacion de manera 
+comoda
+
+npm install body-parser
+
+Ahora necesitamos instalar typescript para poder escribir para el backend,
+en la terminal dentro del proyecto
+
+tsc --init
+
+Esto nos genera un archivo llamado tsconfig.josn , del cual modificamos 
+target es5 por es6
+y outDir por "dist/" que es donde estara nuestro proyecto compilado en .js que
+es lo que se subira al servidor
+
+Ahora en el proyecto creamos un archivo index.ts en el cual se escribra el
+codigo y para probarlo y que se compile automaticamente:
+
+tsc -w
+
+y en otra terminal para ejecutar el .js con node, en una nueva terminal dentro
+del proyecto:
+
+nodemon dist/
+
+
+
+
+
+

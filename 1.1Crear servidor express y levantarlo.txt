@@ -1,0 +1,68 @@
+Primero necesitamos instalar el paquete npm de express para typescript para
+que nos ayude a escribir el codigo, dentro del proycto:
+
+npm install @types/express --save-dev
+
+Primero creamos un archivo server.ts en el cual agregamos:
+
+import express from 'express';
+import { SERVER_PORT } from './global/environment';
+
+
+export default class Server {
+
+    public app:express.Application;
+    public port: number;
+
+    constructor(){
+        this.app= express();
+        this.port= SERVER_PORT;
+    }
+
+}
+
+Despues creamos una carpeta llamada global y dentro un archivo environment.ts
+y dentro de environment.ts
+
+export const SERVER_PORT: number = 5000;
+
+Ahora en el server.ts agregamos la funcion
+
+start( callback : Function ){
+
+        this.app.listen( this.port, callback() );
+    }
+
+Ahora en el index.ts agregamos y arrancamos el servidor
+
+import Server from "./server";
+
+
+
+
+const server = new Server();
+
+server.start( () =>{
+    console.log(`Servidor corriendo en el puerto ${server.port}`);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
