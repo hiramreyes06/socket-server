@@ -1,6 +1,6 @@
 # Servidor express, resvicio rest y sockets
 
-Instalar las dependencias de desarrollo
+Instalar las dependencias de desarrollo ya perro
 ```
 npm install
 ```
