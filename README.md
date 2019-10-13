@@ -1,4 +1,4 @@
-#Servidor express, resvicio rest y sockets
+# Servidor express, resvicio rest y sockets
 
 Instalar las dependencias de desarrollo
 ```
