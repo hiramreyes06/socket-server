@@ -27,6 +27,14 @@ polyfills.ts y agregarle
 
 Y ya perro
 
+---Ahora para usar la conexiom socket.io
+Creamos un servicio para añadir el socket: ng g s services/websocket
+y le agregamos:
+
+import { Socket } from 'ngx-socket-io';
+
+constructor( private socket: Socket) { }
+
 
 
 
