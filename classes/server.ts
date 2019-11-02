@@ -1,9 +1,9 @@
 import express from 'express';
-import { SERVER_PORT } from './global/environment';
+import { SERVER_PORT } from '../global/environment';
 
 
 //Si importamos todos los metdos exportados de la clase
-import * as socket from './sockets/socket';
+import * as socket from '../sockets/socket';
 
 
 //Instalamos el typsecript de socket
@@ -50,11 +50,23 @@ export default class Server {
         console.log('Escuchando conexiones - sockets');
 
         this.io.on('connection', cliente =>{
-            console.log('Cliente conectado');
+
+
+            //Conectar cliente
+            socket.conectarCLiente(cliente);
+
+            //Escuchar lo que emita configurar usuario
+            //Configurar usuario
+            socket.usuarioConfig(cliente, this.io);
+
+            //Esta propiedad contiene el id unico para el cliente con su socket
+            console.log('Cliente conectado, ID: ',cliente.id);
 
 
             //Escuchar lo que emita mensjes
             socket.mensaje(cliente, this.io);
+
+            
 
             //Desconectar cliente
 

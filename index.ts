@@ -1,4 +1,4 @@
-import Server from "./server";
+import Server from "./classes/server";
 import router from "./routes/router";
 
 
