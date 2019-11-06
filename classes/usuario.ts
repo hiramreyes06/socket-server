@@ -7,8 +7,9 @@ public sala: string;
 
 constructor( id:string ){
     this.id=id;
-    this.nombre='Sin nombre';
-    this.sala='Sin sala';
+    //Al usuario sin configurar se le asigna el sin nombre
+    this.nombre='sin-nombre';
+    this.sala='sin-sala';
 
 }
 

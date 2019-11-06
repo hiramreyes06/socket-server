@@ -9,15 +9,17 @@ import { Usuario } from '../classes/usuario';
 export const usuariosConectados = new UsuarioLista();
 
 //
-export const conectarCLiente= ( cliente: Socket)=>{
+export const conectarCLiente= ( cliente: Socket, io:SocketIO.Server)=>{
 
     //ASi le agregamos el id del socket al usuario 
     const usuario= new Usuario(cliente.id);
     usuariosConectados.agregar(usuario);
+
+    
 };
 
 //De esta forma sabemos si el cliente se desconecto
-export const desconectar = ( cliente: Socket) =>{
+export const desconectar = ( cliente: Socket, io: SocketIO.Server) =>{
 
    
 //Asi estamos pendientes si el cliente se desconecta
@@ -27,6 +29,7 @@ cliente.on('disconnect', () =>{
     //De esta forma borramos al usuario de la lista y su conexion
     usuariosConectados.borrarUsuario(cliente.id);
 
+    io.emit('usuarios-activos', usuariosConectados.getLista());
 });
 
 }
@@ -38,7 +41,7 @@ export const mensaje=( cliente: Socket, io:SocketIO.Server) =>{
     //Donde el primer parametro es el nombre del evento
 cliente.on('mensaje', ( payload:{ de:string, cuerpo:string }) =>{
 
-    console.log('Mensaje recibido: ', payload);
+    console.log('Mensaje enviado: ', payload);
 
     //De esta forma emitimos a los cleintes conectados lo que tenga
     //la propiedad mensaje-nuevo
@@ -46,7 +49,8 @@ cliente.on('mensaje', ( payload:{ de:string, cuerpo:string }) =>{
 });
 }
 
-//Asi creamos los canales o socket
+//De esta forma creamos los canales o socket
+//Asi configuramos el nombre del usuario y le asignamos un id socket
 export const usuarioConfig=( cliente: Socket, io:SocketIO.Server) =>{
 
     //Hacer una interface para recbir el payload de un tipo
@@ -55,6 +59,9 @@ cliente.on('configurar-usuario', ( payload:{ nombre:string }, callback:Function)
 
     //Asi agregamos datos al usuario        
     usuariosConectados.actualizarUsuario(cliente.id, payload.nombre);
+
+    //Al configurar un usario, emite usuarios activos
+    io.emit('usuarios-activos', usuariosConectados.getLista());
    
 
     //Con el callback Podemos obtener una respuesta directa
@@ -67,4 +74,21 @@ cliente.on('configurar-usuario', ( payload:{ nombre:string }, callback:Function)
 
    
 });
+}
+
+//Asi escuchamos el evento emitido desde angular
+export const obtenerUsuarios=( cliente: Socket, io:SocketIO.Server) =>{
+
+    //Asi estamos escuchando el evento usuarios-activos desde el servidor
+cliente.on('obtener-usuarios', () =>{
+
+    //De esta forma el evento es emitido para todos los usarios
+   // io.emit('usuarios-activos', usuariosConectados.getLista() );
+
+
+    //Asi emitimos un evento para el usuario propio en su app
+io.to( cliente.id ).emit('usuarios-activos', usuariosConectados.getLista() );
+
+} );
+
 }

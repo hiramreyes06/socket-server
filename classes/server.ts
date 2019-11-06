@@ -53,7 +53,7 @@ export default class Server {
 
 
             //Conectar cliente
-            socket.conectarCLiente(cliente);
+            socket.conectarCLiente(cliente, this.io);
 
             //Escuchar lo que emita configurar usuario
             //Configurar usuario
@@ -62,6 +62,8 @@ export default class Server {
             //Esta propiedad contiene el id unico para el cliente con su socket
             console.log('Cliente conectado, ID: ',cliente.id);
 
+            //Obtener usuarios activos
+            socket.obtenerUsuarios(cliente, this.io);
 
             //Escuchar lo que emita mensjes
             socket.mensaje(cliente, this.io);
@@ -69,8 +71,8 @@ export default class Server {
             
 
             //Desconectar cliente
-
-        socket.desconectar( cliente );
+            //Al desconectarlo emitimos el cambio y lo actualizamos
+        socket.desconectar( cliente, this.io );
 
         });
 
